@@ -20,7 +20,7 @@ pipeline {
                 //echo "${env.WORKSPACE}"
                 //echo "${env.GIT_HASH}"
                 zip zipFile: "webapp-${env.GIT_HASH}.zip", archive: false, dir: "bin/app.publish"
-                nexusPublisher nexusInstanceId: nx3, nexusRepositoryId: files, packages: ["webapp-${env.GIT_HASH}.zip"]
+                nexusPublisher nexusInstanceId: 'nx3', nexusRepositoryId: 'files', packages: ["webapp-${env.GIT_HASH}.zip"]
             }
         }
     }
