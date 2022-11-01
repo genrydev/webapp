@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('NuGet') {
             steps {
-                powershell 'nuget restore'
+                powershell 'dotnet restore'
             }
         }
         stage('Build') {
