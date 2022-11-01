@@ -3,7 +3,8 @@
     stages {
         stage('NuGet') {
             steps {
-                powershell 'nuget restore'
+                //powershell 'nuget restore'
+                echo 'hola mundo'
             }
         }
     }
