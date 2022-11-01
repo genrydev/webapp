@@ -30,12 +30,17 @@ pipeline {
                     repository: 'files',
                     credentialsId: 'nexus-admin',
                     artifacts: [
-                        [artifactId: 'web-app-1-${env.GIT_HASH}',
+                        [artifactId: "web-app-1-${env.GIT_HASH}",
                         type: 'zip',
                         classifier: 'snapshot',
                         file: "webapp-${env.GIT_HASH}.zip"]
                     ]
                 )
+            }
+        }
+        stage ('Deploy To IIS Dev') {
+            steps {
+                echo 'Deploy'
             }
         }
     }
