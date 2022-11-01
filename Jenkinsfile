@@ -7,7 +7,7 @@ pipeline {
             }
         }
         stage('Build') {
-            powershell 'msbuild /p:Configuration=Release /p:DeployOnBuild=true /p:PublishProfile=./FolderProfile.pubxml'
+            powershell "msbuild /p:Configuration=Release /p:DeployOnBuild=true /p:PublishProfile=./FolderProfile.pubxml"
         }
     }
     post {
