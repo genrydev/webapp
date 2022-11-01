@@ -9,9 +9,19 @@ pipeline {
                 powershell 'nuget restore'
             }
         }
+        stage ('Unit Test') {
+            steps {
+                echo 'Unit Test'
+            }
+        }
         stage('Build') {
             steps {
                 powershell 'msbuild /verbosity:quiet /p:Configuration=Release /p:DeployOnBuild=true /p:PublishProfile=./FolderProfile.pubxml'
+            }
+        }
+        stage ('Code Quality') {
+            steps {
+                echo 'Code Quality'
             }
         }
         stage ('Upload Artifact'){
@@ -36,5 +46,25 @@ pipeline {
                 )
             }
         }
-    }    
+        stage ('Deploy To IIS Dev') {
+            steps {
+                echo 'Deploy To IIS Dev'
+            }
+        }
+        stage ('Deploy Notification') {
+            steps {
+                echo 'Deploy Notification'
+            }
+        }
+        stage ('Site Speed Test') {
+            steps {
+                echo 'Site Speed Test'
+            }
+        }
+    }
+    post {
+        always {
+            cleanWs()
+        }
+    }
 }
