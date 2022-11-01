@@ -15,6 +15,11 @@ pipeline {
                 powershell 'msbuild /p:Configuration=Release /p:DeployOnBuild=true /p:PublishProfile=./FolderProfile.pubxml'
             }
         }
+        stage ('Deploy To IIS Dev') {
+            steps {
+                echo 'Code Análisis'
+            }
+        }
         stage ('Upload Artifact'){
             steps {
                 //echo "${env.WORKSPACE}"
