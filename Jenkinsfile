@@ -35,6 +35,7 @@ pipeline {
                         classifier: 'snapshot',
                         file: "webapp-${env.GIT_HASH}.zip"]
                     ]
+                }
             }
         }
     }
