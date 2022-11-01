@@ -1,5 +1,8 @@
 pipeline {
     agent { label "windows" }
+    environment {
+        GIT_HASH = GIT_COMMIT.take(8)
+    }
     stages {
         stage('NuGet') {
             steps {
@@ -15,7 +18,8 @@ pipeline {
         stage ('Upload Artifact'){
             steps {
                 echo "${env.WORKSPACE}"
-                //zip zipFile: 'webapp.zip', archive: false, dir: './archive'
+                echo "${env.GIT_HASH}"
+                zip zipFile: "webapp.zip-${env.GIT_HASH}", archive: false, dir: './bin/spp.publish'
             }
         }
     }
