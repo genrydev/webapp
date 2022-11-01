@@ -3,8 +3,7 @@ pipeline {
     stages {
         stage('NuGet') {
             steps {
-                //powershell 'nuget restore'
-                echo 'hola mundo'
+                powershell 'nuget restore'
             }
         }
     }
