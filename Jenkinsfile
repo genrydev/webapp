@@ -17,9 +17,9 @@ pipeline {
         }
         stage ('Upload Artifact'){
             steps {
-                echo "${env.WORKSPACE}"
-                echo "${env.GIT_HASH}"
-                zip zipFile: "webapp.zip-${env.GIT_HASH}", archive: false, dir: './bin/spp.publish'
+                //echo "${env.WORKSPACE}"
+                //echo "${env.GIT_HASH}"
+                zip zipFile: "webapp.zip-${env.GIT_HASH}", archive: false, dir: "bin/app.publish"
             }
         }
     }
