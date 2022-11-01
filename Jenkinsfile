@@ -21,7 +21,7 @@ pipeline {
                 //echo "${env.GIT_HASH}"
                 zip zipFile: "webapp-${env.GIT_HASH}.zip", archive: false, dir: "bin/app.publish"
                 //nexusPublisher nexusInstanceId: 'nx3', nexusRepositoryId: 'files', packages: "webapp-${env.GIT_HASH}.zip"
-                nexusArtifactUploader {
+                nexusArtifactUploader (
                     nexusVersion: 'nexus3',
                     protocol: 'http',
                     nexusUrl: 'supervm.eastus.cloudapp.azure.com:8081',
@@ -35,7 +35,7 @@ pipeline {
                         classifier: 'snapshot',
                         file: "webapp-${env.GIT_HASH}.zip"]
                     ]
-                }
+                )
             }
         }
     }
