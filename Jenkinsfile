@@ -19,6 +19,21 @@ pipeline {
                 //echo "${env.WORKSPACE}"
                 echo "${env.GIT_HASH}"
                 zip zipFile: "webapp-${env.GIT_HASH}.zip", archive: false, dir: "bin/app.publish"
+                nexusArtifactUploader (
+                    nexusVersion: 'nexus3',
+                    protocol: 'http',
+                    nexusUrl: 'supervm.eastus.cloudapp.azure.com:8081',
+                    groupId: 'bhu.webapps',
+                    version: '1.0.0',
+                    repository: 'files',
+                    credentialsId: 'nexus-admin',
+                    artifacts: [
+                        [artifactId: "web-app-1-${env.GIT_HASH}",
+                        type: 'zip',
+                        classifier: 'snapshot',
+                        file: "webapp-${env.GIT_HASH}.zip"]
+                    ]
+                )
             }
         }
     }    
