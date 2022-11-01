@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('NuGet') {
             steps {
-                powershell 'C:\tools\nuget.exe restore'
+                powershell "C:\\tools\\nuget.exe restore"
             }
         }
         stage('Build') {
