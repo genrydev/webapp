@@ -10,14 +10,19 @@ pipeline {
                 powershell 'nuget restore'
             }
         }
-        stage('Build') {
+        stage ('Unit Test') {
             steps {
-                powershell 'msbuild /p:Configuration=Release /p:DeployOnBuild=true /p:PublishProfile=./FolderProfile.pubxml'
+                echo 'Unit Test'
             }
         }
-        stage ('Deploy To IIS Dev') {
+        stage('Build') {
             steps {
-                echo 'Code Análisis'
+                powershell 'msbuild /verbosity:quiet /p:Configuration=Release /p:DeployOnBuild=true /p:PublishProfile=./FolderProfile.pubxml'
+            }
+        }
+        stage ('Code Quality') {
+            steps {
+                echo 'Code Quality'
             }
         }
         stage ('Upload Artifact'){
@@ -25,7 +30,6 @@ pipeline {
                 //echo "${env.WORKSPACE}"
                 //echo "${env.GIT_HASH}"
                 zip zipFile: "webapp-${env.GIT_HASH}.zip", archive: false, dir: "bin/app.publish"
-                //nexusPublisher nexusInstanceId: 'nx3', nexusRepositoryId: 'files', packages: "webapp-${env.GIT_HASH}.zip"
                 nexusArtifactUploader (
                     nexusVersion: 'nexus3',
                     protocol: 'http',
@@ -45,7 +49,17 @@ pipeline {
         }
         stage ('Deploy To IIS Dev') {
             steps {
-                echo 'Deploy'
+                echo 'Deploy To IIS Dev'
+            }
+        }
+        stage ('Deploy Notification') {
+            steps {
+                echo 'Deploy Notification'
+            }
+        }
+        stage ('Site Speed Test') {
+            steps {
+                echo 'Site Speed Test'
             }
         }
     }
