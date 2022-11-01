@@ -1,9 +1,9 @@
 pipeline {
     agent { label "windows" }
     stages {
-        stage('Hello') {
+        stage('Descargar dependencias') {
             steps {
-                echo 'hola mundo!'
+                powershell 'nuget restore'
             }
         }
     }    
