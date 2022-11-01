@@ -25,12 +25,12 @@ pipeline {
                     nexusVersion: 'nexus3',
                     protocol: 'http',
                     nexusUrl: 'supervm.eastus.cloudapp.azure.com:8081',
-                    groupId: 'bhu.webapp',
+                    groupId: 'bhu.webapps',
                     version: '1.0.0',
                     repository: 'files',
                     credentialsId: 'nexus-admin',
                     artifacts: [
-                        [artifactId: 'nexus-artifact-uploader',
+                        [artifactId: 'web-app-1-${env.GIT_HASH}',
                         type: 'zip',
                         classifier: 'snapshot',
                         file: "webapp-${env.GIT_HASH}.zip"]
@@ -39,9 +39,9 @@ pipeline {
             }
         }
     }
-    // post {
-    //     always {
-    //         cleanWs()
-    //     }
-    // }
+    post {
+        always {
+            cleanWs()
+        }
+    }
 }
